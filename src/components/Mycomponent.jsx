@@ -1,6 +1,7 @@
 import React from "react";
 import Childcomponent from "./Childcomponent"
 import DisplayInfor from "./DisplayInfor"
+import AddUserInfor from "./AddUserInfor"
 
 class Mycomponent extends React.Component {
     state = {
@@ -11,11 +12,15 @@ class Mycomponent extends React.Component {
         ]
     }
 
+    handleAddnewUser = (userObject) => {
+         this.setState({
+         listUser: [userObject, ...this.state.listUser]
+        })
+    }
+
     // sum = (a,b) => {
     //     return a + b;
     // }
-
-    
 
     render() {
         return (
@@ -30,7 +35,7 @@ class Mycomponent extends React.Component {
             // </div>
             <div>
                 <Childcomponent myProp={parent} sum={this.sum}></Childcomponent>
-                {/* <UserInfor></UserInfor> */}
+                <AddUserInfor handleAddnewUser={this.handleAddnewUser}></AddUserInfor>
                 <hr />
                 <DisplayInfor listUser={this.state.listUser}></DisplayInfor>
             </div>
