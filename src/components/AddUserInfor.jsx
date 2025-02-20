@@ -1,47 +1,40 @@
 import React from "react";
-import Childcomponent from "./Childcomponent";
+import { useState } from 'react'
 
-class AddUserInfor extends React.Component {
+const AddUserInfor = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            Name: "",
-            Age: ""
-        }
-    }
+    const [Name, setName] = useState('');
+    const [Age, setAge] = useState('');
+    const [Address, setAddress] = useState('IUH');
 
-    handleOnSubmit = (event) => {
-        event.preventDefault(); // ngăn việc tải lại trang
-        this.props.handleAddnewUser({
-            id: Math.floor((Math.random() * 100) + 1) + "user",
-            Name: this.state.Name,
-            Age: this.state.Age
-        });
-    };
+    const handleOnchangeInput = (event) => {
+        setName(event.target.value)
+}
+    const handleOnchangeAge = (event) => {
+        setAge(event.target.value)
+}
+    const handleOnSubmit = (event) => {
+        event.preventDefault();//ngăn việc tải lại trang
+        props.handleAddnewUser({
+        id: Math.floor((Math.random() * 100) + 1) + "user",
+        Name: Name,
+        Age: Age
+    })
+ }
 
-    render() {
-        return (
-            <div>
-                <form onSubmit={this.handleOnSubmit}>
-                    {/* Your form elements here */}
-                    <input
-                        type="text"
-                        value={this.state.Name}
-                        onChange={(e) => this.setState({ Name: e.target.value })}
-                        placeholder="Enter name"
-                    /> <br />
-                    <input
-                        type="number"
-                        value={this.state.Age}
-                        onChange={(e) => this.setState({ Age: e.target.value })}
-                        placeholder="Enter age"
-                    /> <br />
-                    <button type="submit" style={{marginTop: "20px", backgroundColor: "green", color: "white"}}>Add User</button>
-                </form>
-            </div>
-        );
-    }
+ return (
+    <form action="" onSubmit={(event) => handleOnSubmit(event)}>
+        <label htmlFor="">Your name:</label>
+        <input type="text" value={Name}
+        onChange={(event) => handleOnchangeInput(event)} />
+        <br />
+        <label htmlFor="">Your Age:</label>
+        <input type="number"
+        onChange={(event) => handleOnchangeAge(event)}
+        value={Age} />
+        <br />
+        <button>Submit</button>
+    </form>);
 }
 
 

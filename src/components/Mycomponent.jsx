@@ -2,44 +2,44 @@ import React from "react";
 import Childcomponent from "./Childcomponent"
 import DisplayInfor from "./DisplayInfor"
 import AddUserInfor from "./AddUserInfor"
+import { useState } from 'react'
 
-class Mycomponent extends React.Component {
-    state = {
-        listUser: [
-            {id: 1, Name: "Dung", Age: 49 },
-            {id: 2, Name: "Hoang", Age: 17 },
-            {id: 3, Name: "Chien", Age: 32 },
+const Mycomponent = (props) => {
+
+    const [listUser, setlistUser] = useState(
+        [
+            { id: 1, Name: "Dung", Age: 49 },
+            { id: 2, Name: "Hoang", Age: 17 },
+            { id: 3, Name: "Chien", Age: 32 },
         ]
+    )
+
+const handleAddnewUser = (userObject) => {
+    if (listUser.length > 9) {
+        alert("Danh sách đã đầy, không thể thêm người!");
+        return;
+    }
+     setlistUser([userObject, ...listUser]);
+    }
+    
+    const handleDeleteUser = (userID) => {
+        let listUserClone = listUser;
+        listUserClone = listUserClone.filter(item => item.id!== userID)
+        setlistUser(listUserClone);
     }
 
-    handleAddnewUser = (userObject) => {
-         this.setState({
-         listUser: [userObject, ...this.state.listUser]
-        })
+    const handleDeleteAllUser = () => {
+        setlistUser([]);
     }
 
-    // sum = (a,b) => {
-    //     return a + b;
-    // }
-
-    render() {
-        return (
-            // <div>
-            //     My name is: {this.state.Name}
-            //     <br />
-            //     Address: {this.state.Address}
-            // </div>
-            // <div>
-            //     <Childcomponent myProp={parent} sum={this.sum}></Childcomponent>
-            //     {/* truyền giá trị cho component con thông qua prop */}
-            // </div>
-            <div>
-                <Childcomponent myProp={parent} sum={this.sum}></Childcomponent>
-                <AddUserInfor handleAddnewUser={this.handleAddnewUser}></AddUserInfor>
-                <hr />
-                <DisplayInfor listUser={this.state.listUser}></DisplayInfor>
-            </div>
-        );
-    }
+    return (
+        <div>
+            {/* <Childcomponent myProp={parent} sum={this.sum}></Childcomponent> */}
+            <AddUserInfor handleAddnewUser={handleAddnewUser}></AddUserInfor>
+            <hr />
+            <DisplayInfor listUser={listUser} handleDeleteUser={handleDeleteUser}></DisplayInfor>
+            <button onClick={handleDeleteAllUser} className="btn btn-prime">Delete</button>
+        </div>
+    );
 }
 export default Mycomponent;

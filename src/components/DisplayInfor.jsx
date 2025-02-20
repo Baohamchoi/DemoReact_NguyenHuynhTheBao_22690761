@@ -1,11 +1,24 @@
-import React from "react";
+import React, { use, useEffect } from "react";
+import { useState } from 'react'
 
-class DisplayInfor extends React.Component {
-    render() {
-        const {listUser} = this.props; //truyền từ cha sang con
-        //const listUser=this.props.listUser 
-        //tương đương với cách trên
-        console.log(listUser);
+const DisplayInfor = (props) => {
+    const { listUser } = props; //trong function component không dùng this
+    const [isShowHideListUser, setShowHideListUser] = useState(true);
+    // this.state{
+//     isShowHideListUser:true//gán giá trị cho biến
+    // }
+
+    useEffect(() => {
+        setTimeout(() => {
+            document.title = "Hello React Hook";   
+        }, 3000)
+        console.log("call useEffect");
+    }, []);
+
+     const handleShowHideListUser = () => {
+     setShowHideListUser(!isShowHideListUser);
+    }
+    
         return (
             <div>
                 {listUser.map((user) => {
@@ -13,12 +26,15 @@ class DisplayInfor extends React.Component {
                         <div key={user.id} className={user.Age < 18 ? "red": "blue"}> {/* mỗi phần tử trên trang hải là duy nhất */}
                             <div>User name is: {user.Name}</div>
                             <div>User Age: {user.Age}</div>
+                            <button onClick={() => props.handleDeleteUser(user.id)}>Delete</button>
                             <hr />
                         </div>
                     )
                 })}
+                <span onClick={() => handleShowHideListUser()}>
+                     {isShowHideListUser === true? "Hide list User":"Show list User"}
+                </span>
             </div>
         );
-    };
 } 
 export default DisplayInfor;
