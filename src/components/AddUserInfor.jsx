@@ -15,6 +15,12 @@ const AddUserInfor = (props) => {
 }
     const handleOnSubmit = (event) => {
         event.preventDefault();//ngăn việc tải lại trang
+
+        if (Name == "" || Age == "") {
+            alert("Vui lòng nhập đủ thông tin"); // hiển thị thông báo lỗi
+            return;
+        }
+
         props.handleAddnewUser({
         id: Math.floor((Math.random() * 100) + 1) + "user",
         Name: Name,
@@ -32,8 +38,8 @@ const AddUserInfor = (props) => {
         <input type="number"
         onChange={(event) => handleOnchangeAge(event)}
         value={Age} />
-        <br />
-        <button>Submit</button>
+        <br/>
+        <button style={{backgroundColor: "green", color: "white", marginTop: "20px"}}>Submit</button>
     </form>);
 }
 

@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from 'react'
 
 const Childcomponent = (props) => {
-
     const [Name, setName] = useState('');
     const [Age, setAge] = useState('');
     const [Address, setAddress] = useState('IUH');

@@ -15,10 +15,6 @@ const Mycomponent = (props) => {
     )
 
 const handleAddnewUser = (userObject) => {
-    if (listUser.length > 9) {
-        alert("Danh sách đã đầy, không thể thêm người!");
-        return;
-    }
      setlistUser([userObject, ...listUser]);
     }
     
@@ -38,7 +34,7 @@ const handleAddnewUser = (userObject) => {
             <AddUserInfor handleAddnewUser={handleAddnewUser}></AddUserInfor>
             <hr />
             <DisplayInfor listUser={listUser} handleDeleteUser={handleDeleteUser}></DisplayInfor>
-            <button onClick={handleDeleteAllUser} className="btn btn-prime">Delete</button>
+            <button onClick={handleDeleteAllUser} style={{backgroundColor: "red", color: "white"}}>Delete all</button>
         </div>
     );
 }
